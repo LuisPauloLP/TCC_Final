@@ -1,14 +1,12 @@
-# GED — Sistema de Gestão Eletrônica de Documentos
+# GED – Sistema de Gestão Eletrônica de Documentos
 
-Sistema de Gestão Eletrônica de Documentos (GED) desenvolvido como Trabalho de Conclusão de Curso (TCC), com o objetivo de facilitar a digitalização, organização e gerenciamento de documentos, especialmente boletos bancários.
+Este repositório contém o projeto que desenvolvi como Trabalho de Conclusão de Curso (TCC), com o objetivo de avaliar o impacto de um Sistema de Gestão Eletrônica de Documentos (GED) na redução do tempo de atendimento em serviços de pagamento presenciais.
 
-A aplicação permite digitalizar ou importar documentos, extrair automaticamente informações por meio de OCR e organizar os arquivos para posterior consolidação e acesso por QR Code.
-
----
+O sistema foi desenvolvido para facilitar a digitalização, o armazenamento e a organização de boletos bancários, utilizando tecnologias de reconhecimento óptico de caracteres (OCR) e QR Code.
 
 ## Estrutura do projeto
 
-O repositório está dividido em duas partes principais:
+Organizei o projeto em duas pastas principais:
 
 ```text
 TCC_Final/
@@ -17,121 +15,136 @@ TCC_Final/
 │   └── Aplicativo Android
 │
 ├── Servidor Web/
-│   └── API REST Spring Boot
+│   └── API REST
 │
 ├── README.md
 └── .gitignore
 ```
 
-## Funcionalidades
+## Funcionalidades desenvolvidas
 
-- Digitalização de documentos.
+- Digitalização de documentos pelo aplicativo.
 - Importação de arquivos PDF e imagens.
-- Extração automática de informações utilizando Tesseract OCR.
-- Identificação de beneficiário, vencimento, valor e linha digitável.
+- Extração de informações dos boletos utilizando Tesseract OCR.
+- Identificação automática de beneficiário, vencimento, valor e linha digitável.
 - Armazenamento local de documentos utilizando SQLite.
 - Organização, pesquisa e filtragem de documentos.
 - Seleção de múltiplos documentos.
-- Geração de documentos consolidados.
+- Consolidação de documentos selecionados.
 - Geração de QR Code para acesso ao documento consolidado.
-- Comunicação entre o aplicativo Android e o servidor web.
+- Integração do aplicativo Android com o servidor Web.
 
 ## Tecnologias utilizadas
 
-### Sistema GED — Aplicativo Android
-
+**Aplicativo Android (Sistema GED)**
 - Kotlin
 - Android Studio
 - SQLite
 - Tesseract OCR
 - ZXing
-- Retrofit
 
-### Servidor Web
-
+**Servidor Web**
 - Java
 - Spring Boot
 - Maven
 - Spring Data JPA
 - PostgreSQL
-- API REST
 
 ---
 
-# Instalação e configuração
+# Como executar o projeto
 
-## Requisitos necessários
+Para executar o sistema, é necessário configurar e iniciar o servidor Web e, posteriormente, executar o aplicativo Android.
 
-Antes de executar o projeto, instale:
+## 1. Requisitos
 
-| Ferramenta | Finalidade |
-|---|---|
-| Android Studio | Abrir, configurar e executar o aplicativo GED |
-| IntelliJ IDEA | Abrir, configurar e executar o servidor Web |
-| JDK | Execução do servidor Spring Boot |
-| PostgreSQL | Banco de dados do servidor |
-| Git | Clonagem do repositório |
+As ferramentas utilizadas no desenvolvimento e necessárias para executar o projeto são:
 
-Também será necessário um dispositivo Android físico ou emulador.
+- Android Studio – para abrir e executar o aplicativo.
+- IntelliJ IDEA – para abrir e executar o servidor Web.
+- JDK – para execução do Spring Boot.
+- PostgreSQL – para o banco de dados do servidor.
+- Git – para baixar o repositório.
 
----
+Também é necessário possuir um dispositivo Android ou utilizar um emulador.
 
-# Configuração do Servidor Web
+## 2. Baixar o projeto
 
-## 1. Configurar o PostgreSQL
+Primeiramente, clone este repositório utilizando o comando:
 
-Instale e inicie o PostgreSQL.
+```bash
+git clone https://github.com/LuisPauloLP/TCC_Final.git
+```
 
-Crie o banco de dados utilizado pelo servidor, conforme o nome definido na configuração do projeto.
+Após o download, entre na pasta do projeto:
 
-Configure as credenciais de acesso no arquivo de configuração local do Spring Boot.
+```bash
+cd TCC_Final
+```
+
+# Servidor Web
+
+## 3. Configurar o banco de dados
+
+Antes de iniciar o servidor, é necessário instalar e executar o PostgreSQL.
+
+Crie o banco de dados utilizado pelo projeto, conforme definido nas configurações do servidor.
 
 Exemplo:
 
-```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/seguranca
-spring.datasource.username=postgres
-spring.datasource.password=sua_senha
+```sql
+CREATE DATABASE ged_db;
 ```
 
-**Importante:** substitua os valores conforme a configuração do seu ambiente. Não compartilhe senhas ou segredos JWT.
+Também é necessário configurar as credenciais de acesso ao PostgreSQL.
 
-## 2. Abrir o servidor no IntelliJ IDEA
-
-1. Abra o IntelliJ IDEA.
-2. Selecione **Open**.
-3. Localize a pasta `Servidor Web` do repositório.
-4. Selecione o arquivo `pom.xml` para importar o projeto Maven.
-5. Aguarde o IntelliJ baixar as dependências.
-6. Configure as variáveis de ambiente necessárias para o funcionamento do servidor, incluindo as credenciais do PostgreSQL e o segredo JWT, caso utilizado.
-7. Localize a classe principal do Spring Boot, identificada pela anotação `@SpringBootApplication`.
-8. Clique no botão **Run** para iniciar o servidor.
-
-Por padrão, o servidor poderá ser acessado em:
+No servidor, configure as seguintes variáveis de ambiente:
 
 ```text
-http://localhost:8080
+spring.datasource.url=jdbc:postgresql://localhost:5432/ged_db
+spring.datasource.username=postgres
+spring.datasource.password=SENHA_DO_BANCO
 ```
 
----
+## 4. Abrir e executar o servidor
 
-# Configuração do Sistema GED
+Para executar o servidor, utilizo o IntelliJ IDEA.
 
-## 3. Abrir o aplicativo no Android Studio
+1. Abra o IntelliJ IDEA.
+2. Clique em **Open**.
+3. Selecione a pasta `Servidor Web`.
+4. Aguarde o carregamento do projeto Maven e das dependências.
+5. Configure as variáveis de ambiente necessárias.
+6. Acesse o Prompt de Comando.
+7. Digite "ipconfig", e localize o endereço Ipv4 da máquina, copiando-o.
+8. No Intellij, localize a classe "ConsolidadoService", dentro da pasta "service".
+9. Na linha 95, troque o endereço IP no código para o endereço IP da rede que a máquina está logada.
+10. Localize a classe principal do Spring Boot, identificada pela anotação `@BackendApplication`.
+11. Execute essa classe utilizando o botão **Run**.
+
+Após a inicialização, o servidor estará disponível, por padrão, no endereço:
+
+```text
+http://IP_DA_REDE:8080
+```
+
+# Sistema GED
+
+## 5. Abrir o aplicativo Android
+
+Para executar o aplicativo, utilizo o Android Studio.
 
 1. Abra o Android Studio.
-2. Selecione **Open**.
-3. Localize a pasta `Sistema GED` do repositório.
+2. Clique em **Open**.
+3. Selecione a pasta `Sistema GED`.
 4. Aguarde a sincronização do Gradle.
-5. Verifique se as dependências foram instaladas corretamente.
+5. Verifique se todas as dependências foram carregadas corretamente.
 
-## 4. Configurar o endereço IP do servidor
+## 6. Configurar a conexão com o servidor
 
-Para permitir a comunicação entre o aplicativo Android e o servidor Spring Boot, é necessário configurar o endereço IP da máquina que hospeda o servidor.
+Para que o aplicativo consiga se comunicar com o servidor Web, é necessário configurar o endereço IP da máquina em que o Spring Boot está sendo executado.
 
-Localize no projeto Android o arquivo Kotlin responsável pela configuração da URL da API.
-
-Altere o endereço-base:
+No projeto Android, localize o arquivo "RetrofitClient" e altere o endereço-base:
 
 ```kotlin
 private const val BASE_URL = "http://IP-DO-SERVIDOR:8080/"
@@ -145,18 +158,37 @@ Exemplo:
 private const val BASE_URL = "http://192.168.0.100:8080/"
 ```
 
-**Observações:**
+**Algumas observações:**
 
-- O computador e o dispositivo Android devem estar conectados à mesma rede Wi-Fi.
-- Não utilize `localhost` no aplicativo quando estiver utilizando um celular físico.
-- Verifique se o firewall permite conexões na porta 8080.
-- Caso a porta do servidor seja alterada, atualize também o endereço no aplicativo.
+- O computador e o celular devem estar conectados à mesma rede Wi-Fi.
+- O endereço `localhost` não deve ser utilizado quando o aplicativo estiver sendo executado em um celular físico.
+- O firewall do computador deve permitir conexões na porta utilizada pelo servidor.
+- Caso o endereço IP ou a porta sejam alterados, será necessário atualizar a configuração no aplicativo.
 
-## 5. Executar o aplicativo
+## 7. Executar o aplicativo
 
-1. Certifique-se de que o servidor Spring Boot está em execução no IntelliJ IDEA.
+Depois de configurar a conexão:
+
+1. Verifique se o servidor Web está em execução no IntelliJ IDEA.
 2. No Android Studio, selecione um dispositivo físico ou emulador.
 3. Clique em **Run**.
 4. Aguarde a instalação e inicialização do aplicativo.
 
-O aplicativo estará pronto para utilização após a inicialização do servidor e a configuração correta da conexão com a API.
+Com o servidor e o aplicativo em execução, o sistema estará pronto para utilização.
+
+---
+
+## Observações
+
+- O aplicativo utiliza SQLite para armazenar os documentos localmente.
+- O servidor Web utiliza PostgreSQL para armazenar os dados gerenciados pela API.
+- O arquivo de treinamento `por.traineddata` do Tesseract OCR deve estar disponível no projeto Android para o reconhecimento de documentos em português.
+- As configurações de banco de dados, endereço IP e autenticação devem ser ajustadas de acordo com o ambiente em que o projeto será executado.
+
+## Autor
+
+**Luís Augusto Paulo**
+
+Projeto desenvolvido como Trabalho de Conclusão de Curso (TCC), Universidade do Extremo Sul Catarinense (UNESC).
+
+[GitHub – TCC_Final](https://github.com/LuisPauloLP/TCC_Final)
