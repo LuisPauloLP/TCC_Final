@@ -17,6 +17,9 @@ TCC_Final/
 ├── Servidor Web/
 │   └── API REST
 │
+├── Exemplos/
+│   └── Boletos para testes
+│
 ├── README.md
 └── .gitignore
 ```
