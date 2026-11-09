@@ -130,13 +130,35 @@ class VisualizacaoActivity : AppCompatActivity() {
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
         // Modo de Ajuste (Entrar)
+//        btnAjustar.setOnClickListener {
+//
+//            // Fecha completamente a gaveta
+//            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+//
+//            // Esconde os botões de navegação
+//            btnAnterior.visibility = View.INVISIBLE
+//            btnProximo.visibility = View.INVISIBLE
+//
+//            // Ativa o modo de recorte
+//            cropImageView.isShowCropOverlay = true
+//
+//            // Exibe o botão de confirmação
+//            btnConfirmarAjuste.visibility = View.VISIBLE
+//
+//            // Garante que o botão fique acima dos demais componentes
+//            btnConfirmarAjuste.bringToFront()
+//            Toast.makeText(this, "Modo de ajuste ativado", Toast.LENGTH_SHORT).show()
+//        }
+
         btnAjustar.setOnClickListener {
+
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
             btnAnterior.visibility = View.INVISIBLE
             btnProximo.visibility = View.INVISIBLE
 
-            // Ativa as bordas arrastáveis e guias na imagem
             cropImageView.isShowCropOverlay = true
+
             btnConfirmarAjuste.visibility = View.VISIBLE
         }
 
