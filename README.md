@@ -176,6 +176,14 @@ Depois de configurar a conexão:
 
 Com o servidor e o aplicativo em execução, o sistema estará pronto para utilização.
 
+## 8. Acessar consolidado
+
+Para acessar o documento consolidado, deverá:
+
+1. Realizar o processo de digitalização dos arquivos testes e salvamento dos mesmos.
+2. Acessar o armazenamento, selecionar os documentos e clique em "Enviar Documentos".
+3. Se a comunicação funcionar, aparecerá o QR Code de acesso e o código de acesso.
+4. Para acessar o documento consolidado, deverá ler o QR Code OU acessar a URL "SEU_ENDEREÇO_IP:8080/c/CODIGO_DE_ACESSO_INFORMADO".
 ---
 
 ## Observações
