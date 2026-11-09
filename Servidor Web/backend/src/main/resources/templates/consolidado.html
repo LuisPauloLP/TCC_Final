@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0">
+
+    <title>GED - Documentos para Pagamento</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f6f4;
+            color: #222;
+        }
+
+        .cabecalho {
+            background-color: #2e7d32;
+            color: white;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .cabecalho h1 {
+            margin: 0;
+            font-size: 26px;
+        }
+
+        .cabecalho p {
+            margin: 8px 0 0;
+        }
+
+        .conteudo {
+            width: 92%;
+            max-width: 900px;
+            margin: 30px auto;
+        }
+
+        .informacoes {
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #d8e3d8;
+        }
+
+        .documento {
+            background-color: white;
+            border: 1px solid #d8e3d8;
+            border-left: 6px solid #2e7d32;
+            border-radius: 12px;
+            padding: 22px;
+            margin-bottom: 20px;
+        }
+
+        .documento h2 {
+            color: #1b5e20;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .campo {
+            margin-bottom: 16px;
+        }
+
+        .rotulo {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .valor {
+            font-size: 18px;
+        }
+
+        .valor-monetario {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1b5e20;
+        }
+
+        .linha-digitavel {
+            background-color: #f2f5f2;
+            border-radius: 8px;
+            padding: 15px;
+
+            font-family: monospace;
+            font-size: 18px;
+
+            word-break: break-all;
+        }
+
+        .total-documentos {
+            font-weight: bold;
+            color: #1b5e20;
+        }
+
+        @media (max-width: 600px) {
+
+            .cabecalho h1 {
+                font-size: 21px;
+            }
+
+            .conteudo {
+                width: 95%;
+                margin-top: 15px;
+            }
+
+            .documento {
+                padding: 16px;
+            }
+
+            .linha-digitavel {
+                font-size: 16px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="cabecalho">
+
+    <h1>Documentos para Pagamento</h1>
+
+    <p>
+        Código:
+        <strong th:text="${consolidado.codigoAcesso}">
+            ABC123
+        </strong>
+    </p>
+
+</header>
+
+
+<main class="conteudo">
+
+
+    <section class="informacoes">
+
+        <span class="total-documentos"
+              th:text="${#lists.size(consolidado.documentos) + ' documento(s) para pagamento'}">
+
+            0 documentos para pagamento
+
+        </span>
+
+    </section>
+
+
+    <section
+            class="documento"
+            th:each="documento, status : ${consolidado.documentos}">
+
+
+        <h2
+                th:text="${status.count + ' - ' + documento.nomeArquivo}">
+
+            1 - Documento
+
+        </h2>
+
+
+        <div class="campo">
+
+            <span class="rotulo">
+                Beneficiário
+            </span>
+
+            <span
+                    class="valor"
+                    th:text="${documento.beneficiario}">
+                Beneficiário
+            </span>
+
+        </div>
+
+
+        <div class="campo">
+
+            <span class="rotulo">
+                Vencimento
+            </span>
+
+            <span
+                    class="valor"
+                    th:text="${documento.vencimento}">
+                00/00/0000
+            </span>
+
+        </div>
+
+
+        <div class="campo">
+
+            <span class="rotulo">
+                Valor
+            </span>
+
+            <span
+                    class="valor-monetario"
+                    th:text="${'R$ ' + #numbers.formatDecimal(documento.valor, 1, 'POINT', 2, 'COMMA')}">
+
+                R$ 0,00
+
+            </span>
+
+        </div>
+
+
+        <div class="campo">
+
+            <span class="rotulo">
+                Linha digitável
+            </span>
+
+            <div
+                    class="linha-digitavel"
+                    th:text="${documento.linhaDigitavel}">
+
+                000000000000000000000000000000
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+</body>
+
+</html>
