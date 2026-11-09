@@ -60,130 +60,84 @@ TCC_Final/
 
 # Instalação e configuração
 
-## 1. Requisitos necessários
+## Requisitos necessários
 
 Antes de executar o projeto, instale:
 
 | Ferramenta | Finalidade |
 |---|---|
-| Android Studio | Desenvolvimento e execução do aplicativo |
+| Android Studio | Abrir, configurar e executar o aplicativo GED |
+| IntelliJ IDEA | Abrir, configurar e executar o servidor Web |
 | JDK | Execução do servidor Spring Boot |
 | PostgreSQL | Banco de dados do servidor |
 | Git | Clonagem do repositório |
-| Maven | Gerenciamento e execução do servidor, caso não utilize Maven Wrapper |
 
-Também será necessário um dispositivo Android ou emulador para executar o aplicativo.
+Também será necessário um dispositivo Android físico ou emulador.
 
-## 2. Clonar o repositório
-
-Abra o terminal e execute:
-
-```bash
-git clone https://github.com/LuisPauloLP/TCC_Final.git
-```
-
-Entre na pasta:
-
-```bash
-cd TCC_Final
-```
+---
 
 # Configuração do Servidor Web
 
-## 3. Configurar o PostgreSQL
+## 1. Configurar o PostgreSQL
 
 Instale e inicie o PostgreSQL.
 
-Crie o banco de dados utilizado pelo servidor:
+Crie o banco de dados utilizado pelo servidor, conforme o nome definido na configuração do projeto.
 
-```sql
-CREATE DATABASE ged;
-```
-
-Configure as credenciais de conexão conforme o arquivo de configuração do Spring Boot.
+Configure as credenciais de acesso no arquivo de configuração local do Spring Boot.
 
 Exemplo:
 
 ```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/ged
+spring.datasource.url=jdbc:postgresql://localhost:5432/seguranca
 spring.datasource.username=postgres
 spring.datasource.password=sua_senha
 ```
 
-**Importante:** os nomes do banco, usuário e senha devem corresponder à configuração utilizada pelo projeto.
+**Importante:** substitua os valores conforme a configuração do seu ambiente. Não compartilhe senhas ou segredos JWT.
 
-Se o projeto utilizar Flyway, verifique também as migrações responsáveis pela criação das tabelas.
+## 2. Abrir o servidor no IntelliJ IDEA
 
-## 4. Configurar o servidor Spring Boot
+1. Abra o IntelliJ IDEA.
+2. Selecione **Open**.
+3. Localize a pasta `Servidor Web` do repositório.
+4. Selecione o arquivo `pom.xml` para importar o projeto Maven.
+5. Aguarde o IntelliJ baixar as dependências.
+6. Configure as variáveis de ambiente necessárias para o funcionamento do servidor, incluindo as credenciais do PostgreSQL e o segredo JWT, caso utilizado.
+7. Localize a classe principal do Spring Boot, identificada pela anotação `@SpringBootApplication`.
+8. Clique no botão **Run** para iniciar o servidor.
 
-Abra a pasta:
-
-```text
-Servidor Web/
-```
-
-Configure as variáveis de ambiente necessárias, incluindo:
-
-- DB_URL
-- DB_USERNAME
-- DB_PASSWORD
-- JWT_SECRET (caso utilizado)
-
-Não compartilhe credenciais reais ou segredos JWT.
-
-Abra o terminal dentro da pasta `Servidor Web` e execute:
-
-**Windows:**
-
-```bash
-mvnw.cmd spring-boot:run
-```
-
-**Linux:**
-
-```bash
-./mvnw spring-boot:run
-```
-
-Caso não exista Maven Wrapper:
-
-```bash
-mvn spring-boot:run
-```
-
-Por padrão, o servidor Spring Boot utiliza a porta 8080.
-
-Endereço local:
+Por padrão, o servidor poderá ser acessado em:
 
 ```text
 http://localhost:8080
 ```
 
+---
+
 # Configuração do Sistema GED
 
-## 5. Abrir o aplicativo Android
+## 3. Abrir o aplicativo no Android Studio
 
-Abra o Android Studio e selecione a pasta:
+1. Abra o Android Studio.
+2. Selecione **Open**.
+3. Localize a pasta `Sistema GED` do repositório.
+4. Aguarde a sincronização do Gradle.
+5. Verifique se as dependências foram instaladas corretamente.
 
-```text
-Sistema GED/
-```
+## 4. Configurar o endereço IP do servidor
 
-Aguarde a sincronização do Gradle e a instalação das dependências necessárias.
+Para permitir a comunicação entre o aplicativo Android e o servidor Spring Boot, é necessário configurar o endereço IP da máquina que hospeda o servidor.
 
-## 6. Configurar o endereço IP do servidor
+Localize no projeto Android o arquivo Kotlin responsável pela configuração da URL da API.
 
-Para permitir a comunicação entre o aplicativo Android e o servidor Spring Boot, é necessário configurar o endereço IP da máquina que está executando o servidor.
-
-Localize no projeto Android o arquivo responsável pela configuração da URL da API.
-
-Altere o endereço-base para:
+Altere o endereço-base:
 
 ```kotlin
 private const val BASE_URL = "http://IP-DO-SERVIDOR:8080/"
 ```
 
-Substitua `IP-DO-SERVIDOR` pelo endereço IP local do computador que hospeda o servidor.
+Substitua `IP-DO-SERVIDOR` pelo endereço IP local do computador que está executando o servidor.
 
 Exemplo:
 
@@ -194,44 +148,15 @@ private const val BASE_URL = "http://192.168.0.100:8080/"
 **Observações:**
 
 - O computador e o dispositivo Android devem estar conectados à mesma rede Wi-Fi.
-- Não utilize `localhost` no aplicativo quando estiver executando em um celular físico.
+- Não utilize `localhost` no aplicativo quando estiver utilizando um celular físico.
 - Verifique se o firewall permite conexões na porta 8080.
 - Caso a porta do servidor seja alterada, atualize também o endereço no aplicativo.
-- Para utilização em produção, recomenda-se configurar HTTPS.
 
-## 7. Executar o aplicativo
+## 5. Executar o aplicativo
 
-No Android Studio:
+1. Certifique-se de que o servidor Spring Boot está em execução no IntelliJ IDEA.
+2. No Android Studio, selecione um dispositivo físico ou emulador.
+3. Clique em **Run**.
+4. Aguarde a instalação e inicialização do aplicativo.
 
-1. Abra o projeto localizado em `Sistema GED/`.
-2. Aguarde a sincronização do Gradle.
-3. Selecione um dispositivo Android ou emulador.
-4. Certifique-se de que o servidor Spring Boot está em execução.
-5. Clique em **Run** para instalar e iniciar o aplicativo.
-
----
-
-# Observações importantes
-
-- O aplicativo Android utiliza SQLite para armazenamento local.
-- O servidor web utiliza PostgreSQL para persistência dos dados disponibilizados pela API.
-- O servidor precisa estar em execução para que as funcionalidades que dependem da API funcionem.
-- Os arquivos de treinamento do Tesseract OCR, especialmente `por.traineddata`, precisam estar disponíveis no aplicativo.
-- As configurações locais e credenciais devem ser preenchidas individualmente por cada pessoa que instalar o projeto.
-- Os dados utilizados para testes devem ser fictícios, evitando a exposição de informações pessoais.
-
----
-
-## Autor
-
-**Luís Augusto Paulo**
-
-Projeto desenvolvido no contexto do Trabalho de Conclusão de Curso da Universidade do Extremo Sul Catarinense (UNESC).
-
-## Repositório
-
-[GitHub — TCC_Final](https://github.com/LuisPauloLP/TCC_Final)
-
-## Licença
-
-Projeto acadêmico. A reutilização e distribuição do código devem respeitar os direitos autorais de seus componentes e dependências.
+O aplicativo estará pronto para utilização após a inicialização do servidor e a configuração correta da conexão com a API.
