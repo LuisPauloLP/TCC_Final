@@ -1,0 +1,25 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Base.Theme.GED" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <!-- Cores principais -->
+        <item name="colorPrimary">#176B45</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+
+        <!-- Cores secundárias -->
+        <item name="colorSecondary">#39875F</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+
+        <!-- Fundo da aplicação -->
+        <item name="android:colorBackground">#F4F6F5</item>
+        <item name="colorSurface">#FFFFFF</item>
+        <item name="colorOnSurface">#263238</item>
+
+        <!-- Cor de destaque -->
+        <item name="colorTertiary">#75A98A</item>
+
+    </style>
+
+    <style name="Theme.GED" parent="Base.Theme.GED" />
+
+</resources>

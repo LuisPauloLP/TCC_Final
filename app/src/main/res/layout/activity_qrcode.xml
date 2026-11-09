@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F8F5"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Documentos enviados!"
+            android:textColor="#245C38"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="Peça ao atendente para escanear o QR Code abaixo."
+            android:textColor="#444444"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/imgQRCode"
+            android:layout_width="280dp"
+            android:layout_height="280dp"
+            android:layout_marginTop="24dp"
+            android:background="#FFFFFF"
+            android:contentDescription="QR Code para acessar os documentos"
+            android:padding="8dp"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/txtCodigoAcesso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:textColor="#245C38"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtQuantidadeDocumentos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="#555555"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btnConcluirQRCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:backgroundTint="#287A43"
+            android:text="Concluir"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+</ScrollView>

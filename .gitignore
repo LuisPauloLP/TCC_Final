@@ -1,0 +1,31 @@
+
+# Android Studio
+.gradle/
+.idea/
+**/build/
+local.properties
+*.iml
+
+# Assinaturas Android
+*.jks
+*.keystore
+
+# Spring Boot / Maven
+**/target/
+
+# Configurações locais
+.env
+.env.*
+!.env.example
+**/application-local.properties
+
+# Logs
+*.log
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.vscode/
