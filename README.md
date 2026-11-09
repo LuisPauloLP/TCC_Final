@@ -45,7 +45,7 @@ TCC_Final/
 - SQLite
 - Tesseract OCR
 - ZXing
-- Retrofit (caso utilizado na comunicação com a API)
+- Retrofit
 
 ### Servidor Web
 
